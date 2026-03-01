@@ -6,7 +6,7 @@ function StartGameScreen() {
       <TextInput
         style={styles.numberInput}
         maxLength={2}
-        keyboardType='number-pad'
+        keyboardType='numeric'
         autoCapitalize='none'
         autoCorrect={false}
       />
