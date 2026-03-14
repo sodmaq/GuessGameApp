@@ -1,5 +1,6 @@
 {
   "expo": {
+    "plugins": ["expo-splash-screen"],
     "name": "RNCourse",
     "slug": "RNCourse",
     "version": "1.0.0",
@@ -13,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
