@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, Alert, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  FlatList,
+  Dimensions
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Title from '../components/ui/Title';
@@ -97,7 +104,7 @@ function GameScreen({ userNumber, onGameOver }) {
               <Text>{itemData.item}</Text>
             </View>
           )}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.toString()}
         />
       </View>
     </View>
@@ -109,7 +116,8 @@ export default GameScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 24
+    padding: 24,
+    alignItems: 'center'
   },
   instructionText: {
     marginBottom: 12
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 12,
     marginVertical: 8,
-    backgroundColor: '#ccc',
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 6,
