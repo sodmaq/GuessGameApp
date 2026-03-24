@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Alert,
   FlatList,
-  Dimensions
+  Dimensions,
+  useWindowDimensions
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -34,6 +35,8 @@ function GameScreen({ userNumber, onGameOver }) {
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
+
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -70,12 +73,12 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
-  return (
-    <View style={styles.screen}>
-      {/* Guess */}
-      <Title>Opponent's Guess</Title>
-      <NumberContainer>{currentGuess}</NumberContainer>
+  const guessRoundsListLength = guessRounds.length;
 
+  let content = (
+    <>
+      {' '}
+      <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
           Higher or Lower
@@ -94,6 +97,35 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.buttonsContainerWide}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              <Ionicons name='add' size={24} color='white' />
+            </PrimaryButton>
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              <Ionicons name='remove' size={24} color='white' />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.screen}>
+      {/* Guess */}
+      <Title>Opponent's Guess</Title>
+
+      {content}
 
       <View style={styles.listContainer}>
         <FlatList
@@ -143,5 +175,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 6,
     elevation: 4
+  },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
