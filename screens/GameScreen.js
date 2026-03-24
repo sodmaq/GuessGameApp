@@ -112,6 +112,7 @@ function GameScreen({ userNumber, onGameOver }) {
 }
 
 export default GameScreen;
+const deviceWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   screen: {
